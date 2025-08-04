@@ -61,9 +61,9 @@ const BookCard = ({ book }) => {
         </div>
 
         <div className="flex items-center space-x-2 mb-3">
-          <span className="text-lg font-bold text-gray-900">${price}</span>
+          <span className="text-lg font-bold text-gray-900">Ksh.{price}</span>
           {originalPrice && originalPrice > price && (
-            <span className="text-sm text-gray-500 line-through">${originalPrice}</span>
+            <span className="text-sm text-gray-500 line-through">Ksh.{originalPrice}</span>
           )}
         </div>
 

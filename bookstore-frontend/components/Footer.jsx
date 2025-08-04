@@ -40,9 +40,9 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Contact</h3>
             <div className="space-y-2 text-sm text-gray-300">
-              <p>Email: support@books.com</p>
-              <p>Phone: +1 (555) 123-4567</p>
-              <p>Address: 123 Book St, Reading City</p>
+              <p>Email: mike@books.com</p>
+              <p>Phone: +254728160293</p>
+              <p>Address: 10763-00200, City Square Nairobi</p>
             </div>
           </div>
 
