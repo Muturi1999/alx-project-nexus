@@ -8,16 +8,6 @@ export default function Toast() {
   const dispatch = useAppDispatch()
   const notifications = useAppSelector((state) => state.ui.notifications)
 
-  useEffect(() => {
-    notifications.forEach((notification) => {
-      const timer = setTimeout(() => {
-        dispatch(removeNotification(notification.id))
-      }, 5000)
-
-      return () => clearTimeout(timer)
-    })
-  }, [notifications, dispatch])
-
   const getIcon = (type: string) => {
     switch (type) {
       case 'success':
@@ -43,6 +33,17 @@ export default function Toast() {
         return 'bg-blue-50 border-blue-200'
     }
   }
+
+  // Auto remove notifications after 5 seconds
+  useEffect(() => {
+    notifications.forEach((notification) => {
+      const timer = setTimeout(() => {
+        dispatch(removeNotification(notification.id))
+      }, 5000)
+
+      return () => clearTimeout(timer)
+    })
+  }, [notifications, dispatch])
 
   if (notifications.length === 0) return null
 

@@ -1,8 +1,8 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { Providers } from './providers'
-import ErrorBoundary from '@/components/ui/ErrorBoundary'
+// import { Providers } from './providers'
 import Toast from '@/components/ui/Toast'
+import { Providers } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,12 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
-        <ErrorBoundary>
-          <Providers>
-            {children}
-            <Toast />
-          </Providers>
-        </ErrorBoundary>
+        <Providers>
+          {children}
+          <Toast />
+        </Providers>
       </body>
     </html>
   )

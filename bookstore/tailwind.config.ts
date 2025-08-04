@@ -16,13 +16,6 @@ const config: Config = {
           600: '#2563eb',
           700: '#1d4ed8',
         },
-        secondary: {
-          500: '#8b5cf6',
-          600: '#7c3aed',
-        }
-      },
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
       },
     },
   },
