@@ -52,14 +52,14 @@ import { useAppDispatch, useAppSelector } from '@/store'
 import { fetchFeaturedBooks, fetchBestSellers } from '@/store/slices/booksSlice'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import Sidebar from '@/components/layout/Sidebar'
-import CartSlideOver from '@/components/product/CartSlideOver'
 import Hero from '@/components/sections/Hero'
 import FeaturedBooks from '@/components/sections/FeaturedBooks'
 import BestSellers from '@/components/sections/BestSellers'
 import Categories from '@/components/sections/Categories'
 import Newsletter from '@/components/sections/Newsletter'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
+import Sidebar from '@/components/layout/Sidebar'
+import CartSlideOver from '@/components/product/CartSlideOver'
 
 export default function HomePage() {
   const dispatch = useAppDispatch()
