@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '@/store'
 import { removeNotification } from '@/store/slices/uiSlice'
-import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
+import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon, InformationCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 export default function Toast() {
   const dispatch = useAppDispatch()
