@@ -4,100 +4,13 @@ import Layout from '../layouts/Layout';
 import BookSection from '../components/BookSection';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import { ArrowRight } from 'lucide-react';
+import { BOOKS } from '../data/books';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
-  const mockBooks = [
-    {
-      id: 1,
-      title: "The Lost Something: A Story About Letting Go",
-      author: "Justin Bieber",
-      price: 1500.00,
-      originalPrice: null,
-      rating: 4.8,
-      reviewCount: 234,
-      image: "/api/placeholder/240/320",
-      category: "Fiction"
-    },
-    {
-      id: 2,
-      title: "Goal of Life",
-      author: "Debby Muturi",
-      price: 1200.00,
-      originalPrice: 16.99,
-      rating: 4.6,
-      reviewCount: 156,
-      image: "/api/placeholder/240/320",
-      category: "Self Help"
-    },
-    {
-      id: 3,
-      title: "Learning React: Modern Patterns for Developing React Apps",
-      author: "Alex Kamau",
-      price: 456.00,
-      originalPrice: null,
-      rating: 4.7,
-      reviewCount: 89,
-      image: "/api/placeholder/240/320",
-      category: "Technology"
-    },
-    {
-      id: 4,
-      title: "The Silent Things: A Novel",
-      author: "Jacob Alliet",
-      price: 780.00,
-      originalPrice: 22.99,
-      rating: 4.5,
-      reviewCount: 312,
-      image: "/api/placeholder/240/320",
-      category: "Fiction"
-    },
-    {
-      id: 5,
-      title: "Mountain Stories",
-      author: "Sarah Towwet",
-      price: 544.00,
-      originalPrice: null,
-      rating: 4.3,
-      reviewCount: 78,
-      image: "/api/placeholder/240/320",
-      category: "Adventure"
-    },
-    {
-      id: 6,
-      title: "The Psychology of Money",
-      author: "Morgan Reagan",
-      price: 365.00,
-      originalPrice: null,
-      rating: 4.9,
-      reviewCount: 567,
-      image: "/api/placeholder/240/320",
-      category: "Finance"
-    },
-    {
-      id: 7,
-      title: "Atomic Habits",
-      author: "James Irungu",
-      price: 800.00,
-      originalPrice: null,
-      rating: 4.8,
-      reviewCount: 1234,
-      image: "/api/placeholder/240/320",
-      category: "Self Help"
-    },
-    {
-      id: 8,
-      title: "The Seven Husbands of Evelyn Hugo",
-      author: "Taylor ",
-      price: 600.00,
-      originalPrice: 19.99,
-      rating: 4.7,
-      reviewCount: 892,
-      image: "/api/placeholder/240/320",
-      category: "Fiction"
-    }
-  ];
+  // use shared data
+  const mockBooks = BOOKS;
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
@@ -113,7 +26,10 @@ export default function Home() {
     <Layout>
       <Head>
         <title>Books - Find Your Favorite</title>
-        <meta name="description" content="Discover amazing books from our collection of 1200+ titles" />
+        <meta
+          name="description"
+          content="Discover amazing books from our collection of 1200+ titles"
+        />
       </Head>
 
       {/* Hero Section */}
@@ -151,7 +67,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="space-y-3 mt-8">
                   <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 transform -rotate-1 hover:-rotate-3 transition-transform">
                     <div className="h-32 bg-gradient-to-br from-green-400 to-green-600 rounded-md"></div>
@@ -179,7 +95,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
+
         <div className="absolute bottom-0 left-0 right-0">
           <svg className="w-full h-16" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff"></path>
