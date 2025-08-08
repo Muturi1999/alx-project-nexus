@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { LayoutDashboard, Upload, BookOpen, Users, Package, HelpCircle, LogOut } from "lucide-react";
+import { LayoutDashboard, Upload, BookOpen, Users, Package, HelpCircle, LogOut, ListOrdered } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function AdminSidebar() {
@@ -41,7 +41,7 @@ export default function AdminSidebar() {
         {navItem("/admin/upload", "Upload Books", Upload)}
         {navItem("/admin/manage", "Manage Books", BookOpen)}
         {navItem("/admin/users", "Users", Users)}
-        {navItem("/admin/products", "Product", Package)}
+        {navItem("/admin/orders", "Orders", ListOrdered)}
         {navItem("/admin/help", "Help", HelpCircle)}
         <button
           onClick={handleLogout}

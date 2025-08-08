@@ -13,7 +13,7 @@ import {
   BarChart3,
   Upload,
   Users,
-  Package,
+  ListOrdered,
   HelpCircle,
   Settings,
 } from "lucide-react";
@@ -237,7 +237,7 @@ export default function AdminDashboard() {
                   <QuickAction href="/admin/manage" label="Manage Books" Icon={BookOpen} />
                   <QuickAction href="/admin/upload" label="Upload" Icon={Upload} />
                   <QuickAction href="/admin/users" label="Users" Icon={Users} />
-                  <QuickAction href="/admin/products" label="Products" Icon={Package} />
+                  <QuickAction href="/admin/orders" label="Orders" Icon={ListOrdered} />
                   <QuickAction href="/admin/help" label="Help" Icon={HelpCircle} />
                 </div>
               </div>
