@@ -157,7 +157,6 @@
 // };
 
 // export default BookCard;
-
 "use client";
 
 import { useState } from 'react';
@@ -170,13 +169,17 @@ const BookCard = ({ book }) => {
   const { id, title, author, price, originalPrice, rating, reviewCount, image } = book;
   const [isFavorite, setIsFavorite] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-  const { addToCart } = useCart();
+  
+  // Safely use cart context
+  const cart = useCart();
   
   const handleAddToCart = (e) => {
     e.preventDefault(); // Prevent navigation when clicking the button
-    addToCart(book);
-    setIsAdded(true);
-    setTimeout(() => setIsAdded(false), 2000);
+    if (cart && cart.addToCart) {
+      cart.addToCart(book);
+      setIsAdded(true);
+      setTimeout(() => setIsAdded(false), 2000);
+    }
   };
 
   const renderStars = (rating) => {
