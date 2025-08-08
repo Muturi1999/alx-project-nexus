@@ -1,21 +1,58 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Search, ShoppingCart, User, Menu, X, Heart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { BOOKS } from '../data/books';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // New CartContext API exposes a number: totalCount
+  // Cart badge
   const { totalCount = 0 } = useCart();
   const cartCount = mounted ? totalCount : 0;
 
+  // --- Search state ---
+  const router = useRouter();
+  const [query, setQuery] = useState('');
+  const [open, setOpen] = useState(false);
+  const boxRef = useRef(null);
+
+  useEffect(() => setMounted(true), []);
+
+  // Close dropdown when clicking outside
   useEffect(() => {
-    setMounted(true);
+    function onDocClick(e) {
+      if (!boxRef.current) return;
+      if (!boxRef.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener('click', onDocClick);
+    return () => document.removeEventListener('click', onDocClick);
   }, []);
+
+  // Filter books (title or author)
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return BOOKS.filter(b =>
+      String(b.title).toLowerCase().includes(q) ||
+      String(b.author).toLowerCase().includes(q)
+    ).slice(0, 6); // cap results
+  }, [query]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (results.length > 0) {
+      router.push(`/books/${results[0].id}`);
+      setOpen(false);
+      setQuery('');
+    } else {
+      setOpen(true); // show "No books found"
+    }
+  };
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
@@ -40,15 +77,58 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="hidden md:flex flex-1 max-w-md mx-8">
-            <div className="relative w-full">
+          {/* Desktop Search */}
+          <div className="hidden md:flex flex-1 max-w-md mx-8" ref={boxRef}>
+            <form className="relative w-full" onSubmit={handleSubmit}>
               <input
                 type="text"
+                value={query}
+                onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+                onFocus={() => setOpen(true)}
                 placeholder="Search books, authors..."
                 className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full focus:ring-2 focus:ring-purple-500 focus:border-transparent focus:bg-white transition-colors"
+                aria-label="Search books"
               />
-              <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-            </div>
+              <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 pointer-events-none" />
+            </form>
+
+            {/* Results dropdown */}
+            {open && (
+              <div className="absolute mt-12 w-full bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+                {query.trim() && results.length === 0 && (
+                  <div className="px-4 py-3 text-sm text-gray-600">No books found</div>
+                )}
+                {results.map((b) => {
+                  const safeImage =
+                    !b.image || (typeof b.image === 'string' && b.image.startsWith('/api/placeholder'))
+                      ? '/vercel.svg'
+                      : b.image;
+                  return (
+                    <Link
+                      key={b.id}
+                      href={`/books/${b.id}`}
+                      className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+                      onClick={() => { setOpen(false); setQuery(''); }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={safeImage} alt={b.title} className="w-8 h-10 object-cover rounded" />
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-gray-900 truncate">{b.title}</p>
+                        <p className="text-xs text-gray-600 truncate">by {b.author}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+                {query.trim() && (
+                  <button
+                    className="w-full text-left px-4 py-2 text-xs text-gray-500 border-t hover:bg-gray-50"
+                    onClick={() => { setOpen(false); }}
+                  >
+                    Close
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -77,15 +157,57 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="md:hidden pb-3">
-          <div className="relative">
+        {/* Mobile search */}
+        <div className="md:hidden pb-3" ref={boxRef}>
+          <form className="relative" onSubmit={handleSubmit}>
             <input
               type="text"
+              value={query}
+              onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+              onFocus={() => setOpen(true)}
               placeholder="Search books, authors..."
               className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              aria-label="Search books"
             />
-            <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-          </div>
+            <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 pointer-events-none" />
+          </form>
+
+          {open && (
+            <div className="mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+              {query.trim() && results.length === 0 && (
+                <div className="px-4 py-3 text-sm text-gray-600">No books found</div>
+              )}
+              {results.map((b) => {
+                const safeImage =
+                  !b.image || (typeof b.image === 'string' && b.image.startsWith('/api/placeholder'))
+                    ? '/vercel.svg'
+                    : b.image;
+                return (
+                  <Link
+                    key={b.id}
+                    href={`/books/${b.id}`}
+                    className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+                    onClick={() => { setOpen(false); setQuery(''); setIsMobileMenuOpen(false); }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={safeImage} alt={b.title} className="w-8 h-10 object-cover rounded" />
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium text-gray-900 truncate">{b.title}</p>
+                      <p className="text-xs text-gray-600 truncate">by {b.author}</p>
+                    </div>
+                  </Link>
+                );
+              })}
+              {query.trim() && (
+                <button
+                  className="w-full text-left px-4 py-2 text-xs text-gray-500 border-t hover:bg-gray-50"
+                  onClick={() => setOpen(false)}
+                >
+                  Close
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
