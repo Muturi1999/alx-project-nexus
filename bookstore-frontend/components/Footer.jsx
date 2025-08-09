@@ -46,14 +46,23 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="space-y-4">
+          {/* <div className="space-y-4">
             <h3 className="text-lg font-semibold">We Accept</h3>
             <div className="flex space-x-2">
               <div className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">VISA</div>
               <div className="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">MC</div>
               <div className="bg-blue-500 text-white px-2 py-1 rounded text-xs font-bold">AMEX</div>
             </div>
-          </div>
+          </div> */}
+          <div className="space-y-4">
+  <h3 className="text-lg font-semibold">We Accept</h3>
+  <div className="flex space-x-2">
+    <div className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">VISA</div>
+    <div className="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">Mastercard</div>
+    <div className="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold">M-Pesa</div>
+  </div>
+</div>
+
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
