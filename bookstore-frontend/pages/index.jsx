@@ -274,8 +274,8 @@ export default function Home() {
               <div className="relative ml-auto h-80 w-56 rounded-3xl bg-white shadow-2xl overflow-hidden">
                 <div className="h-full w-full bg-gradient-to-br from-slate-800 to-slate-600" />
                 <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60">
-                  <p className="text-white/80 text-xs tracking-widest">AUTHOR NAME</p>
-                  <h4 className="text-white text-2xl font-semibold mt-1">LOOKING<br />BACK</h4>
+                  <p className="text-white/80 text-xs tracking-widest">Mike Muturi</p>
+                  <h4 className="text-white text-2xl font-semibold mt-1"> POWER OF<br/>GRIT</h4>
                 </div>
               </div>
             </div>

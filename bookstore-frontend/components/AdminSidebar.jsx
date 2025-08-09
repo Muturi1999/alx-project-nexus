@@ -35,7 +35,7 @@ export default function AdminSidebar() {
 
   return (
     <aside className="w-60 shrink-0 bg-white border-r border-gray-200 p-4">
-      <div className="text-2xl font-bold mb-6">Books</div>
+      <div className="text-2xl font-bold mb-6">Muturi Reads</div>
       <nav className="space-y-1">
         {navItem("/admin", "Dashboard", LayoutDashboard)}
         {navItem("/admin/upload", "Upload Books", Upload)}
