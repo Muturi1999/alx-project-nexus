@@ -17,7 +17,7 @@ export default function HelpPage() {
           <AdminSidebar />
           <main className="flex-1 p-6">
             <h1 className="text-2xl font-bold mb-6">Help</h1>
-            <div className="p-6 bg-white border rounded-lg">Need help? Email support@example.com</div>
+            <div className="p-6 bg-white border rounded-lg">Need help? Email support@booksdeveloper.com</div>
           </main>
         </div>
       </div>
